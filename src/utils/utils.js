@@ -16,7 +16,7 @@ function generateCursorBody(messages, modelName) {
     .filter((msg) => msg.role !== 'system');
   const formattedMessages = nonSystemMessages.map((msg) => ({
     ...msg,
-    role: msg.role === 'user' ? 1 : 2,
+    role: msg.role === 'user' ? 1 : msg.role === 'assistant' ? 2 : msg.role,
     messageId: uuidv4()
   }));
 
