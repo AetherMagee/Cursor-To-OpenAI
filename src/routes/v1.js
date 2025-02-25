@@ -19,7 +19,7 @@ router.get("/models", async (req, res) => {
     const checksum = req.headers['x-cursor-checksum'] 
       ?? process.env['x-cursor-checksum'] 
       ?? generateCursorChecksum(authToken.trim());
-    const cursorClientVersion = "0.45.11"
+    const cursorClientVersion = "0.46.3"
 
     const availableModelsResponse = await fetch("https://api2.cursor.sh/aiserver.v1.AiService/AvailableModels", {
       method: 'POST',
@@ -31,7 +31,7 @@ router.get("/models", async (req, res) => {
         'user-agent': 'connect-es/1.6.1',
         'x-cursor-checksum': checksum,
         'x-cursor-client-version': cursorClientVersion,
-        'x-cursor-timezone': 'Asia/Shanghai',
+        'x-cursor-timezone': 'Europe/Stockholm',
         'x-ghost-mode': 'true',
         'Host': 'api2.cursor.sh',
       },
@@ -98,7 +98,7 @@ router.post('/chat/completions', async (req, res) => {
 
     const sessionid = uuidv5(authToken,  uuidv5.DNS);
     const clientKey = generateHashed64Hex(authToken)
-    const cursorClientVersion = "0.45.11"
+    const cursorClientVersion = "0.46.3"
 
     // Request the AvailableModels before StreamChat.
     const availableModelsResponse = await fetch("https://api2.cursor.sh/aiserver.v1.AiService/AvailableModels", {
@@ -113,7 +113,7 @@ router.post('/chat/completions', async (req, res) => {
         'x-client-key': clientKey,
         'x-cursor-checksum': checksum,
         'x-cursor-client-version': cursorClientVersion,
-        'x-cursor-timezone': 'Asia/Shanghai',
+        'x-cursor-timezone': 'Europe/Stockholm',
         'x-ghost-mode': 'true',
         "x-request-id": uuidv4(),
         "x-session-id": sessionid,
@@ -135,7 +135,7 @@ router.post('/chat/completions', async (req, res) => {
         'x-client-key': clientKey,
         'x-cursor-checksum': checksum,
         'x-cursor-client-version': cursorClientVersion,
-        'x-cursor-timezone': 'Asia/Shanghai',
+        'x-cursor-timezone': 'Europe/Stockholm',
         'x-ghost-mode': 'true',
         'x-request-id': uuidv4(),
         'x-session-id': sessionid,
